@@ -11,6 +11,7 @@ Clustering trials
 import numpy as np
 import math
 import matplotlib.pyplot as plt
+from sklearn.cluster import KMeans
 
 def CalulateDistanceBetweenPoints (P1,P2):
     # Calculation of distance between two points, Pitagora theoerem Distance^2 = xd^2 + yd^2
@@ -49,7 +50,7 @@ def BinarySeparation (Data)   :
     # show data
     plt.scatter(GroupAbove[:,0],GroupAbove[:,1],color='red')
     plt.scatter(GroupBelove[:,0],GroupBelove[:,1],color='blue')
-    plt.show()
+    plt.show('plot 1')
 
 def FindGroup (Array,GroupNo,NewGroup,ClusterDisntance):
     # sparate data in N groups where data is with distance from one to another
@@ -95,6 +96,7 @@ def ShowMinDistanceClustering(Array):
                 Xpoints.append(Array [point][0])
                 YPoints.append(Array [point][1]) 
         plt.scatter(Xpoints, YPoints)   
+    plt.show('plot 2')
                       
 NumberOfArray = 100
 Array = np.random.rand(NumberOfArray,2)
@@ -104,3 +106,15 @@ Array =  np.hstack((Array,zeros))
 BinarySeparation(Array[:,0:2])        
 Clustering(Array,0.3)
 ShowMinDistanceClustering(Array)
+
+kmeans = KMeans(n_clusters = 5, init = 'k-means++', random_state = 42)
+y_kmeans = kmeans.fit_predict(Array[:,[0,1]])
+
+# Visualising the clusters
+plt.scatter(Array[:,[0,1]][y_kmeans == 0, 0], Array[:,[0,1]][y_kmeans == 0, 1],  c = 'red', label = 'Cluster 1')
+plt.scatter(Array[:,[0,1]][y_kmeans == 1, 0], Array[:,[0,1]][y_kmeans == 1, 1],  c = 'blue', label = 'Cluster 2')
+plt.scatter(Array[:,[0,1]][y_kmeans == 2, 0], Array[:,[0,1]][y_kmeans == 2, 1],  c = 'green', label = 'Cluster 3')
+plt.scatter(Array[:,[0,1]][y_kmeans == 3, 0], Array[:,[0,1]][y_kmeans == 3, 1],  c = 'cyan', label = 'Cluster 4')
+plt.scatter(Array[:,[0,1]][y_kmeans == 4, 0], Array[:,[0,1]][y_kmeans == 4, 1],  c = 'magenta', label = 'Cluster 5')
+plt.scatter(kmeans.cluster_centers_[:, 0], kmeans.cluster_centers_[:, 1], s = 300, c = 'yellow', label = 'Centroids')
+plt.show('plot 3')

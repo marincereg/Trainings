@@ -94,7 +94,7 @@ def TowerBuilding (Boxes,BuildingFitness):
 # Main program
 if __name__ =="__main__": 
     # Create Boxes [Lenght,Width,Height]
-    BoxCnt = 40
+    BoxCnt = 10
     Boxes,_ = Get_N_Boxes (BoxCnt)
     # Initial boxes building and their fitness
     BuildingFitness = TowerBuildingInit(Boxes)

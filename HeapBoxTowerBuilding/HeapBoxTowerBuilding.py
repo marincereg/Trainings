@@ -94,7 +94,7 @@ def TowerBuilding (Boxes,BuildingFitness):
 # Main program
 if __name__ =="__main__": 
     # Create Boxes [Lenght,Width,Height]
-    BoxCnt = 10
+    BoxCnt = 40
     Boxes,_ = Get_N_Boxes (BoxCnt)
     # Initial boxes building and their fitness
     BuildingFitness = TowerBuildingInit(Boxes)
@@ -116,7 +116,9 @@ if __name__ =="__main__":
             if BuildingFitness[i][1] > MaximumHeight:
                 MaximumHeight = BuildingFitness[i][1]
                 BoxesChosen = BuildingFitness[i][0]
-                
+        
+        # Checking solution number and execution of program
+        print ("Current solutions : " + str(len(BuildingFitness)) + " And Current Best : " + str(MaximumHeight) + " with boxes : " + str(BoxesChosen) )
         # Check for exit condition
         if len(BuildingFitness)==0:
             Done = True
